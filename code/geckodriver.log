@@ -1,0 +1,15 @@
+1558389967102	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/f1/0gvq26zs52v8p2bbncr63k400000gn/T/rust_mozprofile.HjLcNqxbIP4M"
+1558389967761	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1558389967762	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+Can't find symbol 'GetGraphicsResetStatus'.
+1558389969307	Marionette	INFO	Listening on port 60907
+1558389969346	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-3017048822832963&output=html&h=250&slotname=3665633106&adk=2022725118&adf=1507960141&w=300&guci=2.2.0.0.2.2.0.0&format=300x250&url=https%3A%2F%2Fwww.thetoptens.com%2Fbest-movie-villain-quotes%2F&ea=0&flash=0&avail_w=300&wgl=1&adsid=NT&dt=1558389982210&bpp=19&bdt=1855&fdt=1360&idt=1361&shv=r20190515&cbv=r20190131&saldr=aa&correlator=7426591181759&frm=24&ife=3&pv=2&ga_vid=341682737.1558389984&ga_sid=1558389984&ga_hid=631523542&ga_fc=0&icsg=2730&nhd=1&dssz=12&mdo=0&mso=0&u_tz=-300&u_his=1&u_java=0&u_h=1050&u_w=1680&u_ah=961&u_aw=1680&u_cd=24&u_nplug=0&u_nmime=0&adx=0&ady=0&biw=-12245933&bih=-12245933&isw=300&ish=250&ifk=3002893572&scr_x=-12245933&scr_y=-12245933&eid=20040081%2C21060853&oid=3&rx=0&eae=2&brdim=4%2C23%2C4%2C23%2C1680%2C23%2C1280%2C886%2C300%2C250&vis=1&rsz=%7C%7CceE%7C&abl=NS&pfx=0&fu=16&bc=29&ifi=1&uci=1.o3fu2g5ryu64&dtd=1377, line 376: ReferenceError: slider is not defined
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
