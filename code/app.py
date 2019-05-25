@@ -28,15 +28,21 @@ url = "https://www.thetoptens.com/best-movie-villain-quotes/"
 
 
 class MainWindow(QMainWindow):
-    """docstring for Music App"""
+    """docstring for quote guessing game"""
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        #button functions
+        self.ui.nextButton.clicked.connect(self.say_hi)
+
 # def initial_game_state():
 #     print("Guess the name of the film based off the villain quote!")
 #     get_movie_quote()
+
+    def say_hi(self):
+        self.ui.quotesBox.setText("Hello")
 
 
 
