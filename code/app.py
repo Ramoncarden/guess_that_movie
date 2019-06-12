@@ -1,7 +1,5 @@
-# import requests
-# from bs4 import BeautifulSoup
+import re
 import random
-# from selenium import webdriver
 import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QWidget, QShortcut, QFileDialog
@@ -17,21 +15,6 @@ quote_list = [['Why so serious? - The Joker (The Dark Knight)'], ['No, I am your
 
 
 
-
-# game_state = True
-# browser = webdriver.Firefox()
-# browser.get(url)
-# load_more = browser.find_element_by_id("loadmore")
-# load_more.click()
-# time.sleep(0.2)
-# # game_active = True
-
-# res = requests.get(url)
-# soup = BeautifulSoup(res.text, "html.parser")
-# quotes = soup.div.find_all("b")[1:]
-# soup.find(class_="bluebutton")
-
-
 class MainWindow(QMainWindow):
     """docstring for quote guessing game"""
     def __init__(self):
@@ -39,70 +22,59 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.score = 0
+        self.pause_round = False
+              
         #button functions
         self.ui.nextButton.clicked.connect(self.next_question)
-        self.ui.submitButton.clicked.connect(self.increase_score)
+        self.ui.submitButton.clicked.connect(self.submit_answer)
         self.ui.resetButton.clicked.connect(self.reset_game)
+        self.current_text = self.ui.quotesBox.text()
 
-# def initial_game_state():
-#     print("Guess the name of the film based off the villain quote!")
-#     get_movie_quote()
+
+
     def make_question(self):
-        # question = 
-        # answer =
-
+        """generate a game question"""
         whole_quote = str(random.choice(quote_list))
+        self.answer = re.search('\(([^)]+)', whole_quote).group(1).lower()
         return whole_quote.split("-")[0][2:]
     
+    
     def next_question(self):
-        self.ui.quotesBox.setText(self.make_question())
+        """move game state into new round"""
+        if self.pause_round == False:
+            self.ui.quotesBox.setText(self.make_question())
+            self.ui.answerBox.clear()
+            print(self.answer)
+            self.game_state = True
+            self.pause_round = True
+        else:
+            return
+             
 
-    def increase_score(self):
-        self.score += 1
-        self.ui.scoreboard.display(self.score)
+    def submit_answer(self):
+        """submit and check user answer"""
+        current_answer = self.ui.answerBox.text()
+        self.game_state = True
+        if self.game_state:
+            if current_answer.lower() == self.answer.lower():
+                self.ui.quotesBox.setText("Nice Job!")
+                self.score += 1
+                self.ui.scoreboard.display(self.score)
+                self.ui.answerBox.clear()
+                self.game_state = False
+                self.pause_round = False    
+        else:
+            self.ui.quotesBox.setText(f"Sorry that's incorrect. The correct answer was: {self.answer} (Press Reset to start again.)")
 
     def reset_game(self):
+        """reset game state"""
+        self.ui.quotesBox.setText("Guess the movie based off the villain. Press Next to begin ")
+        self.ui.answerBox.clear()
         self.score = 0
-        self.ui.scoreboard.display(0)
-
-    
-# def get_movie_quote():
-#     game_active = True
-#     score = 0
-#     while game_active:
-#         game_question = random.choice(quotes).text
-#         correct_answer = game_question.rpartition("(")[2][:-1].upper()
-#         print(game_question.rpartition("-")[0])
-#         print(correct_answer)
-#         answer = input("Name of movie: ").upper()
-#         if answer == correct_answer:
-#             print("Nice Job! You got it")
-#             score += 1
-#             print(f"You got {score} points")
-#         else:
-#             game_active = False
-#             print("goodbye")
-#     else:
-#         print("would you like to play again? y/n")
+        self.ui.scoreboard.display(self.score)
+        self.pause_round = False
 
 
-
-
-
-
-
-
-    # print(quotes)
-    # quotes = [quotes.text for quotes in soup.div.select("b")[1:]]
-    # print(quotes)
-    # split_quote = quotes.split(separate, 1)[0]
-    # print(split_quote)
-    # print(i)
-    # quotes = soup.find(class_="i").next_sibling
-    # while not url.endswith("#"):
-    #     #request quotes
-    #     res = requests.get(url)
-    #     res.raise_for_status()
 
 
 if __name__=="__main__":
@@ -110,4 +82,3 @@ if __name__=="__main__":
     MainWindow = MainWindow()
     MainWindow.show()
     sys.exit(app.exec_())
-# initial_game_state()

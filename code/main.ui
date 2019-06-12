@@ -126,9 +126,9 @@ min-width: 8em;
    <widget class="QLineEdit" name="answerBox">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>200</y>
-      <width>251</width>
+      <width>241</width>
       <height>21</height>
      </rect>
     </property>
@@ -140,7 +140,7 @@ color: black;</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>200</y>
       <width>60</width>
       <height>21</height>
