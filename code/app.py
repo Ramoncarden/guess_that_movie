@@ -23,6 +23,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.score = 0
         self.pause_round = False
+        self.game_state = False
+
               
         #button functions
         self.ui.nextButton.clicked.connect(self.next_question)
@@ -47,6 +49,7 @@ class MainWindow(QMainWindow):
             print(self.answer)
             self.game_state = True
             self.pause_round = True
+            self.ui.submitButton.setEnabled(True)
         else:
             return
              
@@ -54,7 +57,7 @@ class MainWindow(QMainWindow):
     def submit_answer(self):
         """submit and check user answer"""
         current_answer = self.ui.answerBox.text()
-        self.game_state = True
+        # self.game_state = True
         if self.game_state:
             if current_answer.lower() == self.answer.lower():
                 self.ui.quotesBox.setText("Nice Job!")
@@ -63,8 +66,10 @@ class MainWindow(QMainWindow):
                 self.ui.answerBox.clear()
                 self.game_state = False
                 self.pause_round = False    
+            else:
+                self.ui.quotesBox.setText(f"Sorry that's incorrect. The correct answer was: {self.answer} (Press Reset to start again.)")
         else:
-            self.ui.quotesBox.setText(f"Sorry that's incorrect. The correct answer was: {self.answer} (Press Reset to start again.)")
+            return
 
     def reset_game(self):
         """reset game state"""
@@ -73,8 +78,11 @@ class MainWindow(QMainWindow):
         self.score = 0
         self.ui.scoreboard.display(self.score)
         self.pause_round = False
+        self.ui.submitButton.setEnabled(False)
+        
+        
 
-
+    
 
 
 if __name__=="__main__":
